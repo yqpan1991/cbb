@@ -29,7 +29,7 @@ public class ResponseListenerWrapper implements Response.Listener<String>{
                 }
             }else{
                 if(mErrorListener != null){
-                    mErrorListener.onErrorResponse(new VolleyError("操作失败"));
+                    mErrorListener.onErrorResponse(new VolleyError(EsApiResultHelper.getErrorString(new JSONObject(s))));
                 }
             }
         } catch (JSONException e) {

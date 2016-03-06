@@ -5,4 +5,11 @@
     <string name="nav_date">相约</string>
     <string name="nav_search">搜索</string>
     <string name="nav_mine">我的</string>
+
+
+    <string name="title_dayly_recommend">每日推荐</string>
+    <string name="title_normal_recommend">推荐</string>
+    <string name="title_my_recommend">我的推荐</string>
+
+
 </resources>

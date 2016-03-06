@@ -12,6 +12,7 @@ public class EsApi {
     private static String HOST = EsPreferencesUtils.getString(EsGlobal.getGlobalContext(), KEY_HOST , DEFAULT_HOST);
     private static String SERVER_PREFIX = "/cbb-server";
     public static final String LOGIN = "/user/login";
+    public static final String LOGOUT = "/user/logout";
 
     public static void setHost(String host){
         HOST = host;

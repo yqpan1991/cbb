@@ -10,8 +10,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.apollo.cbb.R;
 import com.apollo.cbb.biz.global.EsGlobal;
+import com.apollo.cbb.biz.net.api.EsApiHelper;
 import com.apollo.cbb.biz.user.EsUserManager;
 import com.apollo.cbb.biz.user.UserInfo;
 import com.apollo.cbb.ui.activity.LoginActivity;
@@ -118,7 +121,32 @@ public class MyFragment extends BaseFragment implements EsUserManager.OnUserLogO
     }
 
     private void handleLogout() {
-        Toast.makeText(EsGlobal.getGlobalContext(), "logout", Toast.LENGTH_SHORT).show();
+        UserInfo userInfo = EsUserManager.getInstance().getUserInfo();
+        if(userInfo == null){
+            updateLogOperationView();
+        }else{
+            int userId = userInfo.getUserId();
+            EsApiHelper.handleLogout(userId, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String s) {
+                    handleLogoutSuc();
+                }
+            }, new Response.ErrorListener(){
+
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    Toast.makeText(EsGlobal.getGlobalContext(), volleyError.toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    private void handleLogoutSuc() {
+        EsUserManager userManager = EsUserManager.getInstance();
+        userManager.setHasLogin(false);
+        userManager.setUserInfo(null);
+        userManager.clearNativeSaveUserInfo();
+        userManager.notifyUserLogout();
     }
 
     private void showUserDetail() {

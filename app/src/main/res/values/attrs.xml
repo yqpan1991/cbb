@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- DmViewPager -->
+    <declare-styleable name="EsViewPager">
+        <attr name="scrollable" format="boolean" />
+    </declare-styleable>
+</resources>

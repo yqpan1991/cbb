@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.RadioGroup;
 
 import com.apollo.cbb.R;
+import com.apollo.cbb.biz.user.EsUserManager;
 import com.apollo.cbb.ui.activity.NavigationBar.NavigationItem;
 import com.apollo.cbb.ui.fragment.BaseFragment;
 import com.apollo.cbb.ui.fragment.DateFragment;
@@ -133,4 +134,9 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EsUserManager.destory();
+    }
 }

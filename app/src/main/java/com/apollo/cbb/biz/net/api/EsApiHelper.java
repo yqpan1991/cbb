@@ -35,14 +35,6 @@ public class EsApiHelper {
     }
 
     public static void handleLogin(final String userName, final String password, final Response.Listener<String> sucListener, final Response.ErrorListener errorListener){
-        JSONObject requestJsonObject = new JSONObject();
-        try {
-            requestJsonObject.put(EsApiKeys.KEY_USER_USERNAME, userName);
-            requestJsonObject.put(EsApiKeys.KEY_USER_PASSWORD, password);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        EsLog.e(TAG,"request param:"+requestJsonObject.toString());
         StringRequest stringRequest = new CustomStringRequest(Request.Method.POST, EsApi.getFullUrl(EsApi.LOGIN), sucListener, errorListener){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
@@ -53,10 +45,18 @@ public class EsApiHelper {
             }
         };
         VolleySingleton.addRequest(stringRequest);
-
     }
 
-    public static void handleLogout(int userId){
+    public static void handleLogout(final int userId, final Response.Listener<String> sucListener, final Response.ErrorListener errorListener){
 
+        StringRequest stringRequest = new CustomStringRequest(Request.Method.POST, EsApi.getFullUrl(EsApi.LOGOUT), sucListener, errorListener){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<>();
+                map.put(EsApiKeys.KEY_USER_USERID, userId+"");
+                return map;
+            }
+        };
+        VolleySingleton.addRequest(stringRequest);
     }
 }
