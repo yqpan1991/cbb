@@ -3,6 +3,8 @@ package com.apollo.cbb.biz.utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
@@ -114,5 +116,21 @@ public class EsNetWorkUtils {
             default:
                 return false;
         }
+    }
+
+    public static String getWifiIp(Context context){
+        WifiManager wifimanage=(WifiManager)context.getSystemService(Context.WIFI_SERVICE);//获取WifiManager
+
+        //检查wifi是否开启
+        if(!wifimanage.isWifiEnabled())  {
+            return null;
+        }
+
+        WifiInfo wifiinfo= wifimanage.getConnectionInfo();
+        return intToIp(wifiinfo.getIpAddress());
+    }
+
+    private static  String intToIp(int i)  {
+        return (i & 0xFF)+ "." + ((i >> 8 ) & 0xFF) + "." + ((i >> 16 ) & 0xFF) +"."+((i >> 24 ) & 0xFF );
     }
 }

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private final String TAG = MainActivity.class.getSimpleName();
     public static final int INDEX_RECOMMEND_FRAGMENT = 0;
