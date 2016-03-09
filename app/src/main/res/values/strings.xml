@@ -12,4 +12,11 @@
     <string name="title_my_recommend">我的推荐</string>
 
 
+    <string name="data_result_empty">空空如也,请点击屏幕重试</string>
+    <string name="data_result_error">网络有误,请点击重试</string>
+    <string name="data_result_unlogin">用户未登录,点击屏幕去登录</string>
+
+
+
+
 </resources>

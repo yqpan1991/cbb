@@ -59,4 +59,36 @@ public class EsApiHelper {
         };
         VolleySingleton.addRequest(stringRequest);
     }
+
+    public static void fetchRecommendList(final int type, Response.Listener<String> sucListener, final Response.ErrorListener errorListener){
+
+        StringRequest stringRequest = new CustomStringRequest(Request.Method.GET, EsApi.getFullUrl(EsApi.RECOMMEND_WITHOUT_ID, type+""), sucListener, errorListener){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<>();
+                map.put(EsApiKeys.KEY_RECOMMEND_TYPE, type+"");
+                return map;
+            }
+        };
+        VolleySingleton.addRequest(stringRequest);
+    }
+
+    public static void fetchRecommendList(final int userId, final int type, Response.Listener<String> sucListener, final Response.ErrorListener errorListener){
+        StringRequest stringRequest = new CustomStringRequest(Request.Method.GET, EsApi.getFullUrl(EsApi.RECOMMEND_WITH_ID, userId+"", type+""), sucListener, errorListener){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<>();
+                map.put(EsApiKeys.KEY_RECOMMEND_TYPE, type+"");
+                map.put(EsApiKeys.KEY_USER_USERID, userId+"");
+                return map;
+            }
+        };
+        VolleySingleton.addRequest(stringRequest);
+    }
+
+    public static void fetchMyRecommendList(int userId, Response.Listener<String> sucList, final Response.ErrorListener errorList){
+
+    }
+
+
 }

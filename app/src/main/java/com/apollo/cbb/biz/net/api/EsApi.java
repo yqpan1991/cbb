@@ -13,6 +13,9 @@ public class EsApi {
     private static String SERVER_PREFIX = "/cbb-server";
     public static final String LOGIN = "/user/login";
     public static final String LOGOUT = "/user/logout";
+    public static final String RECOMMEND = "/food/list";
+    public static final String RECOMMEND_WITHOUT_ID = "/food/list?type=%1s";
+    public static final String RECOMMEND_WITH_ID = "/food/list?userId=%1$s&type=%2$s";
 
     public static void setHost(String host){
         HOST = host;
@@ -27,7 +30,7 @@ public class EsApi {
         return HOST + SERVER_PREFIX + url;
     }
 
-    public static String getFullUrl(String url,Object[] params){
+    public static String getFullUrl(String url,String... params){
         return String.format(HOST+SERVER_PREFIX+url,params);
     }
 }

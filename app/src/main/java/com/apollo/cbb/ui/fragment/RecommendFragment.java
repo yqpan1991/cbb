@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.apollo.cbb.R;
+import com.apollo.cbb.biz.utils.EsLog;
 
 /**
  * Created by Panda on 2016/3/6.
@@ -28,7 +29,7 @@ public class RecommendFragment extends BaseFragment {
 
     private TabLayout mTlTitle;
     private ViewPager mVpContent;
-    private MyPagerAdaper mPagerAdaper;
+    private MyPagerAdapter mPagerAdaper;
 
     @Nullable
     @Override
@@ -43,7 +44,7 @@ public class RecommendFragment extends BaseFragment {
         mVpContent = (ViewPager) view.findViewById(R.id.vp_content);
         mTlTitle.setTabMode(TabLayout.MODE_FIXED);
 
-        mPagerAdaper = new MyPagerAdaper(getActivity().getSupportFragmentManager());
+        mPagerAdaper = new MyPagerAdapter(getChildFragmentManager());
         mVpContent.setOffscreenPageLimit(INDEX_COUNT);
         mVpContent.setAdapter(mPagerAdaper);
         mTlTitle.setupWithViewPager(mVpContent);
@@ -59,9 +60,9 @@ public class RecommendFragment extends BaseFragment {
         super.onDestroyView();
     }
 
-    private class MyPagerAdaper extends FragmentPagerAdapter{
+    private class MyPagerAdapter extends FragmentPagerAdapter{
 
-        public MyPagerAdaper(FragmentManager fm) {
+        public MyPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 

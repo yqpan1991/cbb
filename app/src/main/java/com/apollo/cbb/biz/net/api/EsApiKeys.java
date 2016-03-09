@@ -10,5 +10,8 @@ public class EsApiKeys {
     public static final String KEY_USER_USERINFO= "userInfo";
     public static final String KEY_RESPONSE= "response";
     public static final String KEY_RESPONSE_SUC= "suc";
+    public static final String KEY_RESPONSE_RESULTS= "results";
+
+    public static final String KEY_RECOMMEND_TYPE= "type";
 
 }
