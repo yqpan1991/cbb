@@ -3,15 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.edus.view.DmRecyclerViewWrapper
-        android:id="@+id/drvw_content"
+    <include
+        android:id="@+id/title"
+        layout="@layout/sidebar_msg_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="@dimen/top_bar_height" />
 
-    <TextView
-        android:id="@+id/tv_empty"
+    <RelativeLayout
+        android:id="@+id/rl_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/data_result_empty" />
+        android:layout_below="@id/title"
+        android:layout_height="match_parent">
+        <com.edus.view.DmRecyclerViewWrapper
+            android:id="@+id/drvw_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/tv_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/data_result_empty" />
+    </RelativeLayout>
+
+
 </RelativeLayout>

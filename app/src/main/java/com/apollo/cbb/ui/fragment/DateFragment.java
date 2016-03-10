@@ -11,11 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.apollo.cbb.R;
+import com.apollo.cbb.biz.global.EsGlobal;
 import com.apollo.cbb.biz.net.api.EsApiHelper;
 import com.apollo.cbb.biz.net.api.EsApiKeys;
 import com.apollo.cbb.biz.net.model.RecommendInfo;
@@ -39,6 +41,7 @@ public class DateFragment extends BaseFragment implements View.OnClickListener, 
     private DmRecyclerViewWrapper mDrvwContent;
     private RecommendAdapter mRecommendAdapter;
     private TextView mTvEmpty;
+    private TextView mTvAdd;
 
     @Nullable
     @Override
@@ -49,10 +52,19 @@ public class DateFragment extends BaseFragment implements View.OnClickListener, 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initTitle(view);
         mDrvwContent = (DmRecyclerViewWrapper) view.findViewById(R.id.drvw_content);
         mTvEmpty = (TextView) view.findViewById(R.id.tv_empty);
         mTvEmpty.setOnClickListener(this);
         mTvEmpty.setVisibility(View.INVISIBLE);
+    }
+
+    private void initTitle(View rootView) {
+        rootView.findViewById(R.id.back).setVisibility(View.GONE);
+        ((TextView)rootView.findViewById(R.id.center_title)).setText(R.string.nav_date);
+        mTvAdd = (TextView) rootView.findViewById(R.id.tv_operation);
+        mTvAdd.setVisibility(View.VISIBLE);
+        mTvAdd.setOnClickListener(this);
     }
 
     @Override
@@ -138,6 +150,18 @@ public class DateFragment extends BaseFragment implements View.OnClickListener, 
             case R.id.tv_empty:
                 handleEmptyClicked();
                 break;
+            case R.id.tv_operation:
+                handleAdd();
+                break;
+        }
+    }
+
+    private void handleAdd() {
+        if(EsUserManager.getInstance().hasLogIn()){
+            Toast.makeText(EsGlobal.getGlobalContext(), "未实现", Toast.LENGTH_SHORT).show();
+        }else{
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
         }
     }
 

@@ -2,14 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="@dimen/top_bar_height"
-    android:background="@color/main_color" >
+    android:background="@color/main_color">
 
     <LinearLayout
         android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:clickable="true"
-        android:gravity="center" >
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/iv_title_left"
@@ -18,7 +18,6 @@
             android:clickable="false"
             android:src="@drawable/head_back_selector" />
     </LinearLayout>
-
 
 
     <TextView
@@ -30,10 +29,30 @@
         android:layout_toRightOf="@id/back"
         android:ellipsize="end"
         android:gravity="center_vertical"
-        android:text="title"
         android:singleLine="true"
+        android:text="title"
         android:textAlignment="center"
         android:textColor="@color/color_white_alpha_87"
         android:textSize="17.3sp" />
+
+    <RelativeLayout
+        android:id="@+id/rl_right_operation"
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_operation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:visibility="gone"
+            android:textSize="@dimen/text_size_45"
+            android:textColor="@color/color_white_alpha_87"
+            android:text="@string/title_oeration_add" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

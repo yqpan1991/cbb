@@ -16,6 +16,8 @@
     <string name="data_result_error">网络有误,请点击重试</string>
     <string name="data_result_unlogin">用户未登录,点击屏幕去登录</string>
 
+    <string name="title_oeration_add">添加</string>
+
 
 
 
