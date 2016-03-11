@@ -33,7 +33,9 @@ public class ResponseListenerWrapper implements Response.Listener<String>{
                 }
             }
         } catch (JSONException e) {
-            e.printStackTrace();
+            if(mErrorListener != null){
+                mErrorListener.onErrorResponse(new VolleyError(e.toString()));
+            }
         }
     }
 }

@@ -3,8 +3,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clickable="true" />
+
+    <LinearLayout
+        android:id="@+id/rl_operation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="搜索" />
+        android:orientation="vertical"
+        android:layout_alignParentRight="true">
+
+        <Button
+            android:id="@+id/bt_request_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="10dip" />
+
+        <Button
+            android:id="@+id/bt_root_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_oeration_root_search" />
+
+        <Button
+            android:id="@+id/bt_map_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_oeration_map_search" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/rl_operation"
+        android:minWidth="100dip"
+        android:orientation="vertical"
+        android:padding="2dp">
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="定位icon">
+
+            <RadioButton
+                android:id="@+id/defaulticon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="默认图标"></RadioButton>
+        </RadioGroup>
+    </LinearLayout>
+
+
+
 </RelativeLayout>

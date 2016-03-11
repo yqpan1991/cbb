@@ -18,6 +18,9 @@
 
     <string name="title_oeration_add">添加</string>
 
+    <string name="title_oeration_root_search">路径规划</string>
+    <string name="title_oeration_map_search">地图搜索</string>
+
 
 
 

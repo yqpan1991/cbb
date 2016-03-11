@@ -1,11 +1,18 @@
 package com.apollo.cbb.ui.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.apollo.cbb.R;
 import com.apollo.cbb.biz.user.EsUserManager;
@@ -15,6 +22,7 @@ import com.apollo.cbb.ui.fragment.DateFragment;
 import com.apollo.cbb.ui.fragment.MyFragment;
 import com.apollo.cbb.ui.fragment.RecommendFragment;
 import com.apollo.cbb.ui.fragment.SearchFragment;
+import com.baidu.mapapi.SDKInitializer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,6 +41,7 @@ public class MainActivity extends BaseActivity {
     private NavigationBar mNavBar;
     private ViewPager mViewPager;
     private FragmentManager mFragmentManager;
+    private SDKReceiver mReceiver;
 
     private List<NavigationBar.NavigationItem> mItemList = new ArrayList<>(FRAGMENT_COUNT);
 
@@ -98,6 +107,18 @@ public class MainActivity extends BaseActivity {
         });
 
         mNavBar.setCurrentItemIndex(DEFALUT_INDEX);
+
+        initBaiduSDK();
+    }
+
+    private void initBaiduSDK() {
+        // 注册 SDK 广播监听者
+        IntentFilter iFilter = new IntentFilter();
+        iFilter.addAction(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_OK);
+        iFilter.addAction(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR);
+        iFilter.addAction(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR);
+        mReceiver = new SDKReceiver();
+        registerReceiver(mReceiver, iFilter);
     }
 
     private class MyViewPagerAdapter extends FragmentPagerAdapter {
@@ -136,6 +157,31 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        // 取消监听 SDK 广播
+        unregisterReceiver(mReceiver);
         EsUserManager.destory();
+    }
+
+
+    /**
+     * 构造广播监听类，监听 SDK key 验证以及网络异常广播
+     */
+    public class SDKReceiver extends BroadcastReceiver {
+        public void onReceive(Context context, Intent intent) {
+            String s = intent.getAction();
+            Log.e(TAG, "action: " + s);
+            String tip = null;
+            if (s.equals(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR)) {
+                tip = "key 验证出错! 请在 AndroidManifest.xml 文件中检查 key 设置";
+            } else if (s
+                    .equals(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_OK)) {
+                tip = "key 验证成功! 功能可以正常使用";
+            }
+            else if (s
+                    .equals(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR)) {
+                tip = "网络出错";
+            }
+            Log.e(TAG, "net tip info: "+tip);
+        }
     }
 }
