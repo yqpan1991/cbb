@@ -49,6 +49,9 @@
     <string name="recommend_uploading">推荐上传中...</string>
 
 
+    <string name="title_date_common">约会</string>
+    <string name="title_date_mime">我发出的约会</string>
+
 
 
 </resources>
