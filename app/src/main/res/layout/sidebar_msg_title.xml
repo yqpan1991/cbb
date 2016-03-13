@@ -51,7 +51,7 @@
             android:visibility="gone"
             android:textSize="@dimen/text_size_45"
             android:textColor="@color/color_white_alpha_87"
-            android:text="@string/title_oeration_add" />
+            android:text="@string/title_operation_add" />
 
     </RelativeLayout>
 

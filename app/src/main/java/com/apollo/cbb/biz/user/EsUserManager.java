@@ -14,6 +14,9 @@ public class EsUserManager {
     private static final String SETTING_NATIVE_USERINFO = null;
     private static final String KEY_NATIVE_USERINFO = "native_userinfo";
 
+    public static int USER_TYPE_NORMAL = 0;
+    public static int USER_TYPE_ADMIN = 1;
+
     private static EsUserManager instance;
     private UserInfo mUserInfo;
 

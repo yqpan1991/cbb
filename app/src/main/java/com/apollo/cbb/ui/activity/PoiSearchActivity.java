@@ -1,5 +1,9 @@
 package com.apollo.cbb.ui.activity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
@@ -37,6 +41,8 @@ import java.util.List;
  */
 public class PoiSearchActivity extends FragmentActivity implements
         OnGetPoiSearchResultListener, OnGetSuggestionResultListener {
+    public static final String EXTRA_IS_RECOMMEND = "is_recommend";
+    public static final String EXTRA_RECOMMEND_RESULT = "recommend_result";
 
     private SupportMapFragment mSupportMapFragment;
     private MapView mMapView;
@@ -45,6 +51,7 @@ public class PoiSearchActivity extends FragmentActivity implements
     private PoiSearch mPoiSearch = null;
     private SuggestionSearch mSuggestionSearch = null;
     private List<String> suggest;
+    private boolean mIsSearch;
     /**
      * 搜索关键字输入窗口
      */
@@ -56,6 +63,7 @@ public class PoiSearchActivity extends FragmentActivity implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poisearch);
+        parseComingIntent();
         // 初始化搜索模块，注册搜索事件监听
         mPoiSearch = PoiSearch.newInstance();
         mPoiSearch.setOnGetPoiSearchResultListener(this);
@@ -107,6 +115,10 @@ public class PoiSearchActivity extends FragmentActivity implements
             }
         });
 
+    }
+
+    private void parseComingIntent() {
+        mIsSearch = getIntent().getBooleanExtra(EXTRA_IS_RECOMMEND, false);
     }
 
     @Override
@@ -190,9 +202,28 @@ public class PoiSearchActivity extends FragmentActivity implements
             Toast.makeText(PoiSearchActivity.this, "抱歉，未找到结果", Toast.LENGTH_SHORT)
                     .show();
         } else {
+            if (mIsSearch) {
+                checkReturnValue(result);
+            } else {
+
+            }
             Toast.makeText(PoiSearchActivity.this, result.getName() + ": " + result.getAddress(), Toast.LENGTH_SHORT)
                     .show();
         }
+    }
+
+    private void checkReturnValue(final PoiDetailResult result) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.title_recommend).setMessage(getString(R.string.title_recommend_content, result.getName())).setPositiveButton(R.string.title_recommend_ok, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //需要直接生成短串
+                setResult(RESULT_OK, new Intent().putExtra(EXTRA_RECOMMEND_RESULT, result));
+                finish();
+            }
+        }).setNegativeButton(R.string.title_recommend_cancel, null).show();
+
     }
 
     @Override
@@ -228,4 +259,6 @@ public class PoiSearchActivity extends FragmentActivity implements
             return true;
         }
     }
+
+
 }

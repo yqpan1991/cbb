@@ -16,10 +16,34 @@
     <string name="data_result_error">网络有误,请点击重试</string>
     <string name="data_result_unlogin">用户未登录,点击屏幕去登录</string>
 
-    <string name="title_oeration_add">添加</string>
+    <string name="title_operation_add">添加</string>
+
 
     <string name="title_oeration_root_search">路径规划</string>
     <string name="title_oeration_map_search">地图搜索</string>
+
+
+    <string name="title_recommend">推荐</string>
+    <string name="title_recommend_ok">确定推荐</string>
+    <string name="title_recommend_cancel">取消推荐</string>
+
+
+    <string name="title_recommend_content">确定要推荐这个[%1$s]位置吗?</string>
+
+    <string name="store_name">店铺名称:</string>
+    <string name="store_address">店铺地址:</string>
+    <string name="recommend_type">推荐类型:</string>
+    <string name="recommend_info">推荐信息:</string>
+
+
+    <string name="recommend_type_daily">每日推荐</string>
+    <string name="recommend_type_normal">普通推荐</string>
+
+
+    <string name="recommend_info_edit">编辑推荐信息</string>
+    <string name="recommend_info_edit_empty_tip">推荐信息不能为空</string>
+
+    <string name="recommend_uploading">推荐上传中...</string>
 
 
 

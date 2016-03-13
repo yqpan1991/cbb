@@ -1,5 +1,6 @@
 package com.apollo.cbb.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -9,7 +10,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.android.volley.Response;
@@ -18,6 +22,8 @@ import com.apollo.cbb.R;
 import com.apollo.cbb.biz.net.api.EsApiHelper;
 import com.apollo.cbb.biz.net.api.EsApiKeys;
 import com.apollo.cbb.biz.net.model.RecommendInfo;
+import com.apollo.cbb.biz.user.EsUserManager;
+import com.apollo.cbb.ui.activity.LoginActivity;
 import com.apollo.cbb.ui.adapter.RecommendAdapter;
 import com.edus.view.DmRecyclerViewWrapper;
 import com.edus.view.decoration.DividerItemDecoration;
@@ -35,6 +41,7 @@ public class NormalRecommendFragment extends BaseFragment implements View.OnClic
     private DmRecyclerViewWrapper mDrvwContent;
     private RecommendAdapter mRecommendAdapter;
     private TextView mTvEmpty;
+
 
     @Nullable
     @Override
@@ -127,4 +134,5 @@ public class NormalRecommendFragment extends BaseFragment implements View.OnClic
                 break;
         }
     }
+
 }

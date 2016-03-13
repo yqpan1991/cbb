@@ -16,6 +16,10 @@ public class EsApi {
     public static final String RECOMMEND = "/food/list";
     public static final String RECOMMEND_WITHOUT_ID = "/food/list?type=%1s";
     public static final String RECOMMEND_WITH_ID = "/food/list?userId=%1$s&type=%2$s";
+    public static final String RECOMMEND_MIME = "/food/list/myrec?userId=%1$s";
+    public static final String RECOMMEND_MIME_CANDATE = "/food/list/candate?userId=%1$s";
+
+    public static final String RECOMMEND_UPLOAD= "/food/add";
 
     public static void setHost(String host){
         HOST = host;

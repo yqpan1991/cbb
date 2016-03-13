@@ -86,8 +86,46 @@ public class EsApiHelper {
         VolleySingleton.addRequest(stringRequest);
     }
 
-    public static void fetchMyRecommendList(int userId, Response.Listener<String> sucList, final Response.ErrorListener errorList){
+    public static void fetchMyRecommendList(final int userId, Response.Listener<String> sucListener, final Response.ErrorListener errorListener){
+        StringRequest stringRequest = new CustomStringRequest(Request.Method.GET, EsApi.getFullUrl(EsApi.RECOMMEND_MIME, userId+""), sucListener, errorListener){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<>();
+                map.put(EsApiKeys.KEY_USER_USERID, userId+"");
+                return map;
+            }
+        };
+        VolleySingleton.addRequest(stringRequest);
+    }
 
+    public static void fetchCanDateRecommendList(final int userId, Response.Listener<String> sucListener, final Response.ErrorListener errorListener){
+        StringRequest stringRequest = new CustomStringRequest(Request.Method.GET, EsApi.getFullUrl(EsApi.RECOMMEND_MIME, userId+""), sucListener, errorListener){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<>();
+                map.put(EsApiKeys.KEY_USER_USERID, userId+"");
+                return map;
+            }
+        };
+        VolleySingleton.addRequest(stringRequest);
+    }
+
+    public static void uploadRecommend(final int userId,final int type, final String address, final String storeName,final  double latitude, final double longtitude,final String recommendInfo, Response.Listener<String> sucListener, final Response.ErrorListener errorListener){
+        StringRequest stringRequest = new CustomStringRequest(Request.Method.POST, EsApi.getFullUrl(EsApi.RECOMMEND_UPLOAD), sucListener, errorListener){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<>();
+                map.put(EsApiKeys.KEY_USER_USERID, userId+"");
+                map.put(EsApiKeys.KEY_RECOMMEND_TYPE, type+"");
+                map.put(EsApiKeys.KEY_RECOMMEND_STORE_NAME, storeName);
+                map.put(EsApiKeys.KEY_RECOMMEND_STORE_LATITUDE, latitude+"");
+                map.put(EsApiKeys.KEY_RECOMMEND_STORE_LONGTITUDE, longtitude+"");
+//                map.put(EsApiKeys.KEY_RECOMMEND_STORE_SHORTSTRING, recommendInfo+"");
+                map.put(EsApiKeys.KEY_RECOMMEND_INFO, recommendInfo+"");
+                return map;
+            }
+        };
+        VolleySingleton.addRequest(stringRequest);
     }
 
 

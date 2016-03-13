@@ -13,5 +13,10 @@ public class EsApiKeys {
     public static final String KEY_RESPONSE_RESULTS= "results";
 
     public static final String KEY_RECOMMEND_TYPE= "type";
+    public static final String KEY_RECOMMEND_INFO= "recommendInfo";
+    public static final String KEY_RECOMMEND_STORE_NAME= "storeName";
+    public static final String KEY_RECOMMEND_STORE_LATITUDE= "latitude";
+    public static final String KEY_RECOMMEND_STORE_LONGTITUDE= "longtitude";
+    public static final String KEY_RECOMMEND_STORE_SHORTSTRING= "shortString";
 
 }

@@ -3,8 +3,6 @@ package com.apollo.cbb.biz.user;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
 
-import org.json.JSONObject;
-
 /**
  * Created by Panda on 2016/3/6.
  */
@@ -79,4 +77,7 @@ public class UserInfo {
     }
 
 
+    public boolean isAdmin(){
+        return usertype == EsUserManager.USER_TYPE_ADMIN;
+    }
 }

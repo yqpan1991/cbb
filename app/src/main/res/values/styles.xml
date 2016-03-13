@@ -24,4 +24,10 @@
         <item name="android:textColor">@color/color_black_alpha_87</item>
 
     </style>
+
+    <style name ="DialogTitleStyle">
+        <item name="android:textSize">@dimen/text_size_60</item>
+        <item name="android:textColor">@color/color_black_alpha_87</item>
+
+    </style>
 </resources>
