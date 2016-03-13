@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="current:" />
+                android:text="Current:" />
 
             <TextView
                 android:id="@+id/tv_current"
@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="suggest:" />
+                android:text="Suggest:" />
 
             <EditText
                 android:id="@+id/et_suggest"
@@ -67,11 +67,13 @@
 
 
         <Button
+            android:layout_margin="3dp"
+            android:background="@drawable/btn_bg_selector"
             android:id="@+id/bt_ok"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/rl_suggest"
-            android:text="update" />
+            android:text="Update" />
 
 
     </RelativeLayout>

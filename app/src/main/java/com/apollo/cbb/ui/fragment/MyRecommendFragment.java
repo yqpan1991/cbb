@@ -112,7 +112,7 @@ public class MyRecommendFragment extends BaseFragment implements View.OnClickLis
         if (EsUserManager.getInstance().hasLogIn()) {
             UserInfo userInfo = EsUserManager.getInstance().getUserInfo();
             int userId = userInfo.getUserId();
-            EsApiHelper.fetchMyRecommendList(userId,  new Response.Listener<String>() {
+            EsApiHelper.fetchMyRecommendList(userId, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String s) {
                     Log.e("DaylyRecommendFragment", s);

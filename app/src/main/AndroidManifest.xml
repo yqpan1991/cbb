@@ -52,6 +52,7 @@
         <activity android:name=".ui.activity.WifiSettingActivity"/>
         <activity android:name=".ui.activity.PoiSearchActivity"/>
         <activity android:name=".ui.activity.RoutePlanActivity"/>
+        <activity android:name=".ui.activity.CanDateListActivity"/>
 
         <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote">
         </service>

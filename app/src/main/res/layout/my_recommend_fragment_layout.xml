@@ -11,6 +11,8 @@
         <Button
             android:id="@+id/bt_add"
             android:text="@string/title_operation_add"
+            android:layout_margin="3dp"
+            android:background="@drawable/btn_bg_selector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

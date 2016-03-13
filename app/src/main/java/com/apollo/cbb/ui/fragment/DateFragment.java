@@ -1,5 +1,6 @@
 package com.apollo.cbb.ui.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,6 +24,7 @@ import com.apollo.cbb.biz.net.api.EsApiKeys;
 import com.apollo.cbb.biz.net.model.RecommendInfo;
 import com.apollo.cbb.biz.user.EsUserManager;
 import com.apollo.cbb.biz.user.UserInfo;
+import com.apollo.cbb.ui.activity.CanDateListActivity;
 import com.apollo.cbb.ui.activity.LoginActivity;
 import com.apollo.cbb.ui.adapter.RecommendAdapter;
 import com.edus.view.DmRecyclerViewWrapper;
@@ -42,6 +44,8 @@ public class DateFragment extends BaseFragment implements View.OnClickListener, 
     private RecommendAdapter mRecommendAdapter;
     private TextView mTvEmpty;
     private TextView mTvAdd;
+
+    public static final int REQUEST_CODE_ADD_DATE = 2000;
 
     @Nullable
     @Override
@@ -158,7 +162,8 @@ public class DateFragment extends BaseFragment implements View.OnClickListener, 
 
     private void handleAdd() {
         if(EsUserManager.getInstance().hasLogIn()){
-            Toast.makeText(EsGlobal.getGlobalContext(), "未实现", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), CanDateListActivity.class);
+            startActivityForResult(intent, REQUEST_CODE_ADD_DATE);
         }else{
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
@@ -173,6 +178,22 @@ public class DateFragment extends BaseFragment implements View.OnClickListener, 
             startActivity(intent);
         }
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case REQUEST_CODE_ADD_DATE:
+                handleDateAdded(resultCode, data);
+                break;
+        }
+    }
+
+    private void handleDateAdded(int resultCode, Intent data) {
+        if(resultCode == Activity.RESULT_OK){
+            Toast.makeText(getActivity(), "data.toString() = "+ data.toString(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

@@ -23,15 +23,20 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="25dp"
+            android:background="@drawable/btn_bg_selector"
             android:layout_marginTop="10dip" />
 
         <Button
+            android:background="@drawable/btn_bg_normal"
             android:id="@+id/bt_root_search"
+            android:layout_marginTop="2dip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/title_oeration_root_search" />
 
         <Button
+            android:layout_marginTop="2dip"
+            android:background="@drawable/btn_bg_normal"
             android:id="@+id/bt_map_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
