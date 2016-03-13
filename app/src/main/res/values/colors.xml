@@ -7,4 +7,7 @@
 
     <color name="blue">#0000ff</color>
     <color name="white">#FFFFFF</color>
+
+    <color name="rb_checked">#220000ff</color>
+    <color name="rb_normal">#990000ff</color>
 </resources>

@@ -58,17 +58,34 @@ public class MainActivity extends BaseActivity {
         mNavBar = new NavigationBar(this, (RadioGroup) findViewById(R.id.rg_nav));
         mNavBar.setOnCheckedChangedListener(new NavigationBar.OnCheckedItemChangedListener() {
             @Override
-            public void onCheckedItemChanged(NavigationBar.NavigationItem item) {
-                MainActivity.this.onCheckedItemChanged(item);
+            public void onCheckedItemChanged(RadioGroup group, int checkedId) {
+                MainActivity.this.onCheckedItemChanged(checkedId);
             }
         });
         mViewPager = (ViewPager) findViewById(R.id.vp_content);
     }
 
-    private void onCheckedItemChanged(NavigationBar.NavigationItem item) {
-        int index = mItemList.indexOf(item);
-        if(index >= 0){
-            mViewPager.setCurrentItem(index);
+    private void onCheckedItemChanged(int checkedId) {
+//        int index = mItemList.indexOf(item);
+//        if(index >= 0){
+//            mViewPager.setCurrentItem(index);
+//        }
+        switch (checkedId) {
+            case R.id.rb_recommend:
+                mViewPager.setCurrentItem(0);
+                break;
+            case R.id.rb_date:
+                mViewPager.setCurrentItem(1);
+                break;
+            case R.id.rb_search:
+                mViewPager.setCurrentItem(2);
+                break;
+            case R.id.rb_Me:
+                mViewPager.setCurrentItem(3);
+                break;
+            default:
+                mViewPager.setCurrentItem(0);
+                break;
         }
     }
 
@@ -82,9 +99,9 @@ public class MainActivity extends BaseActivity {
         mItemList.addAll(Arrays.asList(items));
 
 
-        for(int index = 0; index < items.length; index ++){
-            mNavBar.addItem(items[index]);
-        }
+//        for(int index = 0; index < items.length; index ++){
+//            mNavBar.addItem(items[index]);
+//        }
         mFragmentManager = getSupportFragmentManager();
         mViewPager.setOffscreenPageLimit(FRAGMENT_COUNT);
         mViewPager.setAdapter(new MyViewPagerAdapter(mFragmentManager));
@@ -176,12 +193,11 @@ public class MainActivity extends BaseActivity {
             } else if (s
                     .equals(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_OK)) {
                 tip = "key 验证成功! 功能可以正常使用";
-            }
-            else if (s
+            } else if (s
                     .equals(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR)) {
                 tip = "网络出错";
             }
-            Log.e(TAG, "net tip info: "+tip);
+            Log.e(TAG, "net tip info: " + tip);
         }
     }
 }

@@ -6,11 +6,63 @@
     >
 
     <RadioGroup
+        android:background="#6666ff"
         android:id="@+id/rg_nav"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_recommend"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@drawable/nav_bar_selector"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:text="推荐"
+            android:textSize="@dimen/text_size_57" />
+
+        <RadioButton
+            android:id="@+id/rb_date"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@drawable/nav_bar_selector"
+            android:button="@null"
+            android:gravity="center"
+            android:text="相约"
+            android:textSize="@dimen/text_size_57" />
+
+        <RadioButton
+            android:id="@+id/rb_search"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@drawable/nav_bar_selector"
+            android:button="@null"
+            android:gravity="center"
+            android:text="搜索"
+            android:textSize="@dimen/text_size_57" />
+
+        <RadioButton
+            android:id="@+id/rb_Me"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@drawable/nav_bar_selector"
+            android:button="@null"
+            android:gravity="center"
+            android:text="我的"
+            android:textSize="@dimen/text_size_57" />
+    </RadioGroup>
 
     <com.apollo.cbb.ui.widget.EsViewPager
         android:id="@+id/vp_content"
@@ -18,4 +70,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/rg_nav" />
+
 </RelativeLayout>

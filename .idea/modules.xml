@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Cbb.iml" filepath="$PROJECT_DIR$/Cbb.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cbb.iml" filepath="$PROJECT_DIR$/cbb.iml" />
       <module fileurl="file://$PROJECT_DIR$/extendablerecyclerview/extendablerecyclerview.iml" filepath="$PROJECT_DIR$/extendablerecyclerview/extendablerecyclerview.iml" />
     </modules>
   </component>
