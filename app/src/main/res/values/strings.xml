@@ -38,10 +38,13 @@
 
     <string name="recommend_type_daily">每日推荐</string>
     <string name="recommend_type_normal">普通推荐</string>
+    <string name="recommend_type_date">约会</string>
 
 
     <string name="recommend_info_edit">编辑推荐信息</string>
+    <string name="recommend_date_info_edit">编辑约会信息</string>
     <string name="recommend_info_edit_empty_tip">推荐信息不能为空</string>
+    <string name="recommend_date_info_edit_empty_tip">约会信息不能为空</string>
 
     <string name="recommend_uploading">推荐上传中...</string>
 

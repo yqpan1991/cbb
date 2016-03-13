@@ -1,13 +1,9 @@
 package com.apollo.cbb.ui.fragment;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -31,11 +27,10 @@ import com.apollo.cbb.biz.net.model.RecommendInfo;
 import com.apollo.cbb.biz.user.EsUserManager;
 import com.apollo.cbb.biz.user.UserInfo;
 import com.apollo.cbb.biz.utils.EsLog;
-import com.apollo.cbb.ui.PoiResultEditDialog;
+import com.apollo.cbb.ui.dialog.PoiResultEditDialog;
 import com.apollo.cbb.ui.activity.LoginActivity;
 import com.apollo.cbb.ui.activity.PoiSearchActivity;
 import com.apollo.cbb.ui.adapter.RecommendAdapter;
-import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.poi.PoiDetailResult;
 import com.edus.view.DmRecyclerViewWrapper;
 import com.edus.view.decoration.DividerItemDecoration;
@@ -232,9 +227,6 @@ public class MyRecommendFragment extends BaseFragment implements View.OnClickLis
             //2. edit info
 
             //3. commit info
-            String storeName = poiDetailResult.getName();
-            String storeAddress = poiDetailResult.getAddress();
-            LatLng location = poiDetailResult.getLocation();
             //弹出对话框,编辑推荐信息,然后推荐即可
             showRecommendDialog(poiDetailResult);
 
@@ -265,7 +257,7 @@ public class MyRecommendFragment extends BaseFragment implements View.OnClickLis
         progressDialog.setMessage(getString(R.string.recommend_uploading));
         progressDialog.show();
         UserInfo userInfo = EsUserManager.getInstance().getUserInfo();
-        EsApiHelper.uploadRecommend(userInfo.getUserId(), type, poiDetailResult.getAddress(), poiDetailResult.getName(), poiDetailResult.getLocation().latitude, poiDetailResult.getLocation().longitude, recommendInfo,
+        EsApiHelper.uploadRecommend(userInfo.getUserId(), type,  poiDetailResult.getName(), poiDetailResult.getLocation().latitude, poiDetailResult.getLocation().longitude, recommendInfo,
                 new Response.Listener<String>(){
 
                     @Override

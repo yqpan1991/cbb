@@ -1,6 +1,7 @@
 package com.apollo.cbb.ui.fragment;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.apollo.cbb.R;
 import com.apollo.cbb.biz.global.EsGlobal;
+import com.apollo.cbb.biz.net.api.EsApiConst;
 import com.apollo.cbb.biz.net.api.EsApiHelper;
 import com.apollo.cbb.biz.net.api.EsApiKeys;
 import com.apollo.cbb.biz.net.model.RecommendInfo;
@@ -27,6 +29,8 @@ import com.apollo.cbb.biz.user.UserInfo;
 import com.apollo.cbb.ui.activity.CanDateListActivity;
 import com.apollo.cbb.ui.activity.LoginActivity;
 import com.apollo.cbb.ui.adapter.RecommendAdapter;
+import com.apollo.cbb.ui.dialog.AddDateDialog;
+import com.baidu.mapapi.search.poi.PoiDetailResult;
 import com.edus.view.DmRecyclerViewWrapper;
 import com.edus.view.decoration.DividerItemDecoration;
 
@@ -193,7 +197,54 @@ public class DateFragment extends BaseFragment implements View.OnClickListener, 
     private void handleDateAdded(int resultCode, Intent data) {
         if(resultCode == Activity.RESULT_OK){
             Toast.makeText(getActivity(), "data.toString() = "+ data.toString(), Toast.LENGTH_SHORT).show();
+            RecommendInfo info = (RecommendInfo) data.getSerializableExtra(CanDateListActivity.EXTRA_ADD_DATE_RESULT);
+            if(info == null){
+                return;
+            }
+            showAddDateDialog(info);
         }
+    }
+
+    private void showAddDateDialog(final RecommendInfo info) {
+        AddDateDialog dialog = new AddDateDialog(getActivity(), info, new AddDateDialog.AddDateResultListener(){
+
+            @Override
+            public void onCancelClicked() {
+
+            }
+
+            @Override
+            public void onOKClicked(String editInfo) {
+                uploadRecommendInfo(info, editInfo);
+            }
+        });
+        dialog.show();
+    }
+
+    private void uploadRecommendInfo(RecommendInfo recommendInfo, String recommendDateInfo) {
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage(getString(R.string.recommend_uploading));
+        progressDialog.show();
+        UserInfo userInfo = EsUserManager.getInstance().getUserInfo();
+        EsApiHelper.uploadRecommend(userInfo.getUserId(), EsApiConst.RECOMMEND_TYPE_DATE,  recommendInfo.storeName, recommendInfo.latitude, recommendInfo.longtitude, recommendDateInfo,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String s) {
+                        progressDialog.dismiss();
+                        mDrvwContent.setRefreshing(true);
+                        loadData();
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getActivity(), volleyError.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
     }
 
     @Override

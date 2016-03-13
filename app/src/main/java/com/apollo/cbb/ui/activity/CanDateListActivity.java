@@ -1,5 +1,8 @@
 package com.apollo.cbb.ui.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -18,6 +21,7 @@ import com.apollo.cbb.biz.net.model.RecommendInfo;
 import com.apollo.cbb.biz.user.EsUserManager;
 import com.apollo.cbb.biz.user.UserInfo;
 import com.apollo.cbb.ui.adapter.CanDateAdapter;
+import com.apollo.cbb.ui.adapter.CommonItemClickListener;
 import com.apollo.cbb.ui.adapter.RecommendAdapter;
 import com.edus.view.DmRecyclerViewWrapper;
 import com.edus.view.decoration.DividerItemDecoration;
@@ -31,6 +35,8 @@ import java.util.List;
  * Created by Panda on 2016/3/13.
  */
 public class CanDateListActivity extends BaseActivity implements View.OnClickListener {
+
+    public static final String EXTRA_ADD_DATE_RESULT = "add_date_result";
 
     private DmRecyclerViewWrapper mDrvwContent;
     private CanDateAdapter mRecommendAdapter;
@@ -49,7 +55,7 @@ public class CanDateListActivity extends BaseActivity implements View.OnClickLis
         mUserInfo = EsUserManager.getInstance().getUserInfo();
         mDrvwContent.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mDrvwContent.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
-        mRecommendAdapter = new CanDateAdapter(this);
+        mRecommendAdapter = new CanDateAdapter(this, mCommonItemClickListener);
         mDrvwContent.setAdapter(mRecommendAdapter);
         mDrvwContent.enableLoadMore(false);
         mDrvwContent.enableRefresh(false);
@@ -112,6 +118,33 @@ public class CanDateListActivity extends BaseActivity implements View.OnClickLis
         mTvEmpty = (TextView) findViewById(R.id.tv_empty);
         mTvEmpty.setOnClickListener(this);
         mTvEmpty.setVisibility(View.INVISIBLE);
+    }
+
+    private CommonItemClickListener mCommonItemClickListener = new CommonItemClickListener() {
+
+        @Override
+        public void onItemClickListener(int viewType, int position, View rootView, View clickView) {
+            RecommendInfo info = mRecommendAdapter.getAdapterDataItem(position);
+            showConfirmDialog(info);
+        }
+
+        @Override
+        public boolean onItemLongClickListener(int viewType, int position, View rootView, View clickView) {
+            return false;
+        }
+    };
+
+    private void showConfirmDialog(final RecommendInfo result) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.title_recommend).setMessage(getString(R.string.title_recommend_content, result.storeName)).setPositiveButton(R.string.title_recommend_ok, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //需要直接生成短串
+                setResult(RESULT_OK, new Intent().putExtra(EXTRA_ADD_DATE_RESULT, result));
+                finish();
+            }
+        }).setNegativeButton(R.string.title_recommend_cancel, null).show();
     }
 
     @Override

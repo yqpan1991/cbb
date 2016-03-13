@@ -110,7 +110,7 @@ public class EsApiHelper {
         VolleySingleton.addRequest(stringRequest);
     }
 
-    public static void uploadRecommend(final int userId,final int type, final String address, final String storeName,final  double latitude, final double longtitude,final String recommendInfo, Response.Listener<String> sucListener, final Response.ErrorListener errorListener){
+    public static void uploadRecommend(final int userId,final int type, final String storeName,final  double latitude, final double longtitude,final String recommendInfo, Response.Listener<String> sucListener, final Response.ErrorListener errorListener){
         StringRequest stringRequest = new CustomStringRequest(Request.Method.POST, EsApi.getFullUrl(EsApi.RECOMMEND_UPLOAD), sucListener, errorListener){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {

@@ -15,8 +15,11 @@ import com.edus.view.DmBaseViewHolder;
  */
 public class CanDateAdapter extends DmBaseAdapter<RecommendInfo> {
 
-    public CanDateAdapter(Context context) {
+    private CommonItemClickListener mCommonItemClickListener;
+
+    public CanDateAdapter(Context context, CommonItemClickListener commonItemClickListener) {
         super(context);
+        mCommonItemClickListener = commonItemClickListener;
     }
 
     @Override
@@ -29,8 +32,27 @@ public class CanDateAdapter extends DmBaseAdapter<RecommendInfo> {
         holder.updateData(mDataList.get(dataListPosition), dataListPosition);
     }
 
+    private class MyItemClickListener implements View.OnClickListener {
+        private int viewType;
+        private int position;
+        private View rootView;
 
-    private class MyViewHolder extends DmBaseViewHolder<RecommendInfo>{
+        public MyItemClickListener(int viewType, int position, View rootView) {
+            this.viewType = viewType;
+            this.position = position;
+            this.rootView = rootView;
+        }
+
+        @Override
+        public void onClick(View v) {
+            if(mCommonItemClickListener != null){
+                mCommonItemClickListener.onItemClickListener(viewType, position, rootView, v);
+            }
+        }
+    }
+
+
+    private class MyViewHolder extends DmBaseViewHolder<RecommendInfo> {
 
         private TextView mTvStoreName;
         private TextView mTvDescription;
@@ -46,6 +68,7 @@ public class CanDateAdapter extends DmBaseAdapter<RecommendInfo> {
             super.updateData(recommendInfo, position);
             mTvStoreName.setText(recommendInfo.storeName);
             mTvDescription.setText(recommendInfo.description);
+            itemView.setOnClickListener(new MyItemClickListener(0, position, itemView));
         }
     }
 
