@@ -62,12 +62,10 @@ public class PoiResultEditDialog extends Dialog implements View.OnClickListener 
         mTvAddress.setText(mPoiDetailResult.getAddress());
         mTvAddress.setText(mPoiDetailResult.getLocation().toString());
 
-        if(mIsAdmin){
-            mRgRecommendType.setEnabled(true);
-        }else{
-            mRgRecommendType.setEnabled(false);
+        if(!mIsAdmin){
+            mRgRecommendType.findViewById(R.id.rb_daily).setVisibility(View.GONE);
         }
-        mRgRecommendType.check(R.id.rb_daily);
+        mRgRecommendType.check(R.id.rb_normal);
     }
 
     @Override

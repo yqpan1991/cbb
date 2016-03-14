@@ -60,5 +60,9 @@
 
     <string name="comment_is_empty">未输入评论信息,请核实</string>
 
+    <string name="title_register">注册用户</string>
+    <string name="title_do_register">注册</string>
+
+
 
 </resources>

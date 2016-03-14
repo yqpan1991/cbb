@@ -3,17 +3,10 @@ package com.apollo.cbb.biz.net.api;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.apollo.cbb.biz.net.VolleySingleton;
 import com.apollo.cbb.biz.net.request.CustomStringRequest;
 import com.apollo.cbb.biz.user.EsUserManager;
-import com.apollo.cbb.biz.user.UserInfo;
-import com.apollo.cbb.biz.utils.EsLog;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,12 +23,8 @@ public class EsApiHelper {
 
     }
 
-    public static void registerUser(){
-
-    }
-
     public static void handleLogin(final String userName, final String password, final Response.Listener<String> sucListener, final Response.ErrorListener errorListener){
-        StringRequest stringRequest = new CustomStringRequest(Request.Method.POST, EsApi.getFullUrl(EsApi.LOGIN), sucListener, errorListener){
+        StringRequest stringRequest = new CustomStringRequest(Request.Method.POST, EsApi.getFullUrl(EsApi.USER_LOGIN), sucListener, errorListener){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map = new HashMap<>();
@@ -49,7 +38,7 @@ public class EsApiHelper {
 
     public static void handleLogout(final int userId, final Response.Listener<String> sucListener, final Response.ErrorListener errorListener){
 
-        StringRequest stringRequest = new CustomStringRequest(Request.Method.POST, EsApi.getFullUrl(EsApi.LOGOUT), sucListener, errorListener){
+        StringRequest stringRequest = new CustomStringRequest(Request.Method.POST, EsApi.getFullUrl(EsApi.USER_LOGOUT), sucListener, errorListener){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map = new HashMap<>();
@@ -141,6 +130,20 @@ public class EsApiHelper {
                 map.put(EsApiKeys.KEY_USER_USERID, userId+"");
                 map.put(EsApiKeys.KEY_COMMENT_USERSTORE_ID, userStoreId+"");
                 map.put(EsApiKeys.KEY_COMMENT_USERSTORE_COMMENT, comment);
+                return map;
+            }
+        };
+        VolleySingleton.addRequest(stringRequest);
+    }
+
+    public static void registerUser(final String userName, final String password, Response.Listener<String> sucListener, final Response.ErrorListener errorListener){
+        StringRequest stringRequest = new CustomStringRequest(Request.Method.POST, EsApi.getFullUrl(EsApi.USER_REGISTER), sucListener, errorListener){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<>();
+                map.put(EsApiKeys.KEY_USER_USERNAME, userName+"");
+                map.put(EsApiKeys.KEY_USER_PASSWORD, password+"");
+                map.put(EsApiKeys.KEY_USER_USERTYPE, EsUserManager.USER_TYPE_NORMAL+"");
                 return map;
             }
         };
