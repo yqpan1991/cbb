@@ -1,6 +1,9 @@
 package com.apollo.cbb.biz.net.model;
 
+import android.content.Context;
+
 import com.alibaba.fastjson.annotation.JSONField;
+import com.apollo.cbb.R;
 
 import java.io.Serializable;
 
@@ -9,7 +12,7 @@ import java.io.Serializable;
  */
 public class RecommendInfo implements Serializable{
 
-    public static final int RECOMMEND_TYPE_DAYLY = 1;
+    public static final int RECOMMEND_TYPE_DAILY = 1;
     public static final int RECOMMEND_TYPE_NORMAL = 2;
     public static final int RECOMMEND_TYPE_DATE = 3;
 
@@ -57,5 +60,22 @@ public class RecommendInfo implements Serializable{
                 ", date=" + date +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    public static String getRecommendTypeString(Context context, int type){
+        int resId = R.string.recommend_type_daily;
+        switch (type){
+            case RECOMMEND_TYPE_DAILY:
+                resId = R.string.recommend_type_daily;
+                break;
+            case RECOMMEND_TYPE_NORMAL:
+                resId = R.string.recommend_type_normal;
+                break;
+            case RECOMMEND_TYPE_DATE:
+                resId = R.string.recommend_type_date;
+                break;
+
+        }
+        return context.getString(resId);
     }
 }

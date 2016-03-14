@@ -1,48 +1,17 @@
 package com.apollo.cbb.ui.fragment;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.apollo.cbb.R;
-import com.apollo.cbb.biz.global.EsGlobal;
-import com.apollo.cbb.biz.net.api.EsApiConst;
-import com.apollo.cbb.biz.net.api.EsApiHelper;
-import com.apollo.cbb.biz.net.api.EsApiKeys;
-import com.apollo.cbb.biz.net.model.RecommendInfo;
-import com.apollo.cbb.biz.user.EsUserManager;
-import com.apollo.cbb.biz.user.UserInfo;
-import com.apollo.cbb.ui.activity.CanDateListActivity;
-import com.apollo.cbb.ui.activity.LoginActivity;
-import com.apollo.cbb.ui.adapter.RecommendAdapter;
-import com.apollo.cbb.ui.dialog.AddDateDialog;
-import com.baidu.mapapi.search.poi.PoiDetailResult;
-import com.edus.view.DmRecyclerViewWrapper;
-import com.edus.view.decoration.DividerItemDecoration;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.List;
 
 /**
  * Created by Panda on 2016/3/6.

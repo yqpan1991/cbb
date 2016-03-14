@@ -1,7 +1,5 @@
 package com.apollo.cbb.ui.fragment;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,25 +10,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.apollo.cbb.R;
-import com.apollo.cbb.biz.net.api.EsApiConst;
 import com.apollo.cbb.biz.net.api.EsApiHelper;
 import com.apollo.cbb.biz.net.api.EsApiKeys;
 import com.apollo.cbb.biz.net.model.RecommendInfo;
 import com.apollo.cbb.biz.user.EsUserManager;
 import com.apollo.cbb.biz.user.UserInfo;
-import com.apollo.cbb.ui.activity.CanDateListActivity;
 import com.apollo.cbb.ui.activity.LoginActivity;
+import com.apollo.cbb.ui.activity.RecommendDetailActivity;
+import com.apollo.cbb.ui.adapter.CommonItemClickListener;
 import com.apollo.cbb.ui.adapter.RecommendAdapter;
-import com.apollo.cbb.ui.dialog.AddDateDialog;
 import com.edus.view.DmRecyclerViewWrapper;
 import com.edus.view.decoration.DividerItemDecoration;
 
@@ -71,7 +65,7 @@ public class CommonDateFragment extends BaseFragment implements View.OnClickList
         super.onActivityCreated(savedInstanceState);
         mDrvwContent.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
         mDrvwContent.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-        mRecommendAdapter = new RecommendAdapter(getActivity());
+        mRecommendAdapter = new RecommendAdapter(getActivity(), mCommonItemClickListener);
         mDrvwContent.setAdapter(mRecommendAdapter);
         mDrvwContent.enableLoadMore(false);
         mDrvwContent.enableRefresh(false);
@@ -84,6 +78,20 @@ public class CommonDateFragment extends BaseFragment implements View.OnClickList
         @Override
         public void onRefresh() {
             loadData();
+        }
+    };
+
+    private CommonItemClickListener mCommonItemClickListener = new CommonItemClickListener() {
+
+        @Override
+        public void onItemClickListener(int viewType, int position, View rootView, View clickView) {
+            RecommendInfo info = mRecommendAdapter.getAdapterDataItem(position);
+            startActivity(RecommendDetailActivity.genRecommendDetailIntent(getActivity(), info));
+        }
+
+        @Override
+        public boolean onItemLongClickListener(int viewType, int position, View rootView, View clickView) {
+            return false;
         }
     };
 

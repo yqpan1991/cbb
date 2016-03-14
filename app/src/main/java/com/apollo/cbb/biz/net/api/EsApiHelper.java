@@ -128,5 +128,25 @@ public class EsApiHelper {
         VolleySingleton.addRequest(stringRequest);
     }
 
+    public static void fetchRecommendCommentList(final int userStoreId, Response.Listener<String> sucListener, final Response.ErrorListener errorListener){
+        StringRequest stringRequest = new CustomStringRequest(Request.Method.GET, EsApi.getFullUrl(EsApi.RECOMMEND_COMMENT_LIST, userStoreId+""), sucListener, errorListener);
+        VolleySingleton.addRequest(stringRequest);
+    }
+
+    public static void uploadComment(final int userId, final int userStoreId,final String comment, Response.Listener<String> sucListener, final Response.ErrorListener errorListener){
+        StringRequest stringRequest = new CustomStringRequest(Request.Method.POST, EsApi.getFullUrl(EsApi.RECOMMEND_COMMENT_UPLOAD), sucListener, errorListener){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<>();
+                map.put(EsApiKeys.KEY_USER_USERID, userId+"");
+                map.put(EsApiKeys.KEY_COMMENT_USERSTORE_ID, userStoreId+"");
+                map.put(EsApiKeys.KEY_COMMENT_USERSTORE_COMMENT, comment);
+                return map;
+            }
+        };
+        VolleySingleton.addRequest(stringRequest);
+    }
+
+
 
 }

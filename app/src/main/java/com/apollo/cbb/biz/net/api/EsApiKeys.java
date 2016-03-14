@@ -19,4 +19,7 @@ public class EsApiKeys {
     public static final String KEY_RECOMMEND_STORE_LONGTITUDE= "longtitude";
     public static final String KEY_RECOMMEND_STORE_SHORTSTRING= "shortString";
 
+    public static final String KEY_COMMENT_USERSTORE_ID = "userStoreId";
+    public static final String KEY_COMMENT_USERSTORE_COMMENT = "comment";
+
 }

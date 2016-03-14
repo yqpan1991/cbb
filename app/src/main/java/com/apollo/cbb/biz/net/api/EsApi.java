@@ -21,6 +21,9 @@ public class EsApi {
 
     public static final String RECOMMEND_UPLOAD= "/food/add";
 
+    public static final String RECOMMEND_COMMENT_LIST = "/date/comment/list?userStoreId=%1$s";
+    public static final String RECOMMEND_COMMENT_UPLOAD = "/date/comment";
+
     public static void setHost(String host){
         HOST = host;
         EsPreferencesUtils.putString(EsGlobal.getGlobalContext(), KEY_HOST, host);

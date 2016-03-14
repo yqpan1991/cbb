@@ -5,14 +5,13 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apollo.cbb.R;
-import com.apollo.cbb.biz.net.api.EsApiConst;
+import com.apollo.cbb.biz.net.model.RecommendInfo;
 import com.baidu.mapapi.search.poi.PoiDetailResult;
 
 /**
@@ -96,7 +95,7 @@ public class PoiResultEditDialog extends Dialog implements View.OnClickListener 
         }else{
             if(mListener != null){
                 int type = mRgRecommendType.getCheckedRadioButtonId() == R.id.rb_daily ?
-                        EsApiConst.RECOMMEND_TYPE_DAILY : EsApiConst.RECOMMEND_TYPE_NORMAL;
+                        RecommendInfo.RECOMMEND_TYPE_DAILY : RecommendInfo.RECOMMEND_TYPE_NORMAL;
                 mListener.onOKClicked(mEtPoiRecommendInfo.getText().toString(), type);
             }
             dismiss();

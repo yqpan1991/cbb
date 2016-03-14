@@ -15,8 +15,15 @@ import com.edus.view.DmBaseViewHolder;
  */
 public class RecommendAdapter extends DmBaseAdapter<RecommendInfo> {
 
+    private CommonItemClickListener mCommonItemClickListener;
+
     public RecommendAdapter(Context context) {
         super(context);
+    }
+
+    public RecommendAdapter(Context context, CommonItemClickListener commonItemClickListener) {
+        super(context);
+        mCommonItemClickListener = commonItemClickListener;
     }
 
     @Override
@@ -27,6 +34,25 @@ public class RecommendAdapter extends DmBaseAdapter<RecommendInfo> {
     @Override
     public void onBindAdapterViewHolder(DmBaseViewHolder<RecommendInfo> holder, int dataListPosition) {
         holder.updateData(mDataList.get(dataListPosition), dataListPosition);
+    }
+
+    private class MyItemClickListener implements View.OnClickListener {
+        private int viewType;
+        private int position;
+        private View rootView;
+
+        public MyItemClickListener(int viewType, int position, View rootView) {
+            this.viewType = viewType;
+            this.position = position;
+            this.rootView = rootView;
+        }
+
+        @Override
+        public void onClick(View v) {
+            if(mCommonItemClickListener != null){
+                mCommonItemClickListener.onItemClickListener(viewType, position, rootView, v);
+            }
+        }
     }
 
 
@@ -46,6 +72,7 @@ public class RecommendAdapter extends DmBaseAdapter<RecommendInfo> {
             super.updateData(recommendInfo, position);
             mTvStoreName.setText(recommendInfo.storeName);
             mTvDescription.setText(recommendInfo.description);
+            itemView.setOnClickListener(new MyItemClickListener(0, position, itemView));
         }
     }
 

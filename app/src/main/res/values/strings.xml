@@ -34,6 +34,7 @@
     <string name="store_address">店铺地址:</string>
     <string name="recommend_type">推荐类型:</string>
     <string name="recommend_info">推荐信息:</string>
+    <string name="recommend_user">推荐人:</string>
 
 
     <string name="recommend_type_daily">每日推荐</string>
@@ -52,6 +53,12 @@
     <string name="title_date_common">约会</string>
     <string name="title_date_mime">我发出的约会</string>
 
+    <string name="title_recommend_detail">详情</string>
+    <string name="title_recommend_comment">评论</string>
+    <string name="recommend_comment">评论</string>
+    <string name="recommend_comment_tip">请输入评论信息</string>
+
+    <string name="comment_is_empty">未输入评论信息,请核实</string>
 
 
 </resources>

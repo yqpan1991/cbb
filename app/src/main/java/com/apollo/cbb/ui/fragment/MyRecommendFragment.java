@@ -27,6 +27,8 @@ import com.apollo.cbb.biz.net.model.RecommendInfo;
 import com.apollo.cbb.biz.user.EsUserManager;
 import com.apollo.cbb.biz.user.UserInfo;
 import com.apollo.cbb.biz.utils.EsLog;
+import com.apollo.cbb.ui.activity.RecommendDetailActivity;
+import com.apollo.cbb.ui.adapter.CommonItemClickListener;
 import com.apollo.cbb.ui.dialog.PoiResultEditDialog;
 import com.apollo.cbb.ui.activity.LoginActivity;
 import com.apollo.cbb.ui.activity.PoiSearchActivity;
@@ -76,7 +78,7 @@ public class MyRecommendFragment extends BaseFragment implements View.OnClickLis
         super.onActivityCreated(savedInstanceState);
         mDrvwContent.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
         mDrvwContent.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-        mRecommendAdapter = new RecommendAdapter(getActivity());
+        mRecommendAdapter = new RecommendAdapter(getActivity(), mCommonItemClickListener);
         mDrvwContent.setAdapter(mRecommendAdapter);
         mDrvwContent.setOnRefreshListener(mOnRefreshListener);
         loadData();
@@ -88,6 +90,20 @@ public class MyRecommendFragment extends BaseFragment implements View.OnClickLis
         @Override
         public void onRefresh() {
             loadData();
+        }
+    };
+
+    private CommonItemClickListener mCommonItemClickListener = new CommonItemClickListener() {
+
+        @Override
+        public void onItemClickListener(int viewType, int position, View rootView, View clickView) {
+            RecommendInfo info = mRecommendAdapter.getAdapterDataItem(position);
+            startActivity(RecommendDetailActivity.genRecommendDetailIntent(getActivity(), info));
+        }
+
+        @Override
+        public boolean onItemLongClickListener(int viewType, int position, View rootView, View clickView) {
+            return false;
         }
     };
 
